@@ -65,8 +65,8 @@ def cli(dtm_input_slot, input_usage_report, input_dtm_notes_mapping, input_col_v
                 index_values = filtered_df.index.values
                 for index_tuple in index_values:
                     slot_name = index_tuple[0]
-                    if target_schema.slots[slot_name].notes and len(target_schema.slots[slot_name].notes) > 0:
-                        temp_notes = target_schema.slots[slot_name].notes
+                    if target_schema.slots[slot_name].keywords and len(target_schema.slots[slot_name].keywords) > 0:
+                        temp_notes = target_schema.slots[slot_name].keywords
                         temp_notes = set(temp_notes)
                         if note_val:
                             temp_notes.add(note_val)
@@ -75,7 +75,7 @@ def cli(dtm_input_slot, input_usage_report, input_dtm_notes_mapping, input_col_v
                     else:
                         temp_notes = [note_val]
 
-                    target_schema.slots[slot_name].notes = temp_notes
+                    target_schema.slots[slot_name].keywords = temp_notes
 
             else:
                 pass

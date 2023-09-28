@@ -115,7 +115,7 @@ dtm_to_notes_lod = dtm_to_notes_frame.to_dict('records')
 
 for dtm_to_note_dict in dtm_to_notes_lod:
     dtm_val = dtm_to_note_dict['dtm']
-    note_val = dtm_to_note_dict['note']
+    note_val = dtm_to_note_dict['keywords']
     try:
         filtered_df = dtm_df.loc[dtm_df[dtm_val] > 0]
         matched_rows = filtered_df.shape[0]
@@ -126,8 +126,8 @@ for dtm_to_note_dict in dtm_to_notes_lod:
                 # print(
                 #     f"slot {slot_name} has the string '{dtm_val}' in it's {dtm_input_slot} so gets the note '{note_val}'")
 
-                if target_schema.slots[slot_name].notes and len(target_schema.slots[slot_name].notes) > 0:
-                    temp_notes = target_schema.slots[slot_name].notes
+                if target_schema.slots[slot_name].keywords and len(target_schema.slots[slot_name].keywords) > 0:
+                    temp_notes = target_schema.slots[slot_name].keywords
                     temp_notes = set(temp_notes)
                     if note_val:
                         temp_notes.add(note_val)
@@ -136,7 +136,7 @@ for dtm_to_note_dict in dtm_to_notes_lod:
                 else:
                     temp_notes = [note_val]
 
-                target_schema.slots[slot_name].notes = temp_notes
+                target_schema.slots[slot_name].keywords = temp_notes
 
         else:
             pass
