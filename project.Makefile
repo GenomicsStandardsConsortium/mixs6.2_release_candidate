@@ -71,7 +71,7 @@ squeaky-clean: pre-clean
 
 generated-schema/mixs_6_2_rc.yaml:
 	$(RUN) write-mixs-linkml \
-		 --gsc-excel-input 'https://github.com/only1chunts/mixs-cih-fork/raw/main/mixs/excel/mixs_v6.xlsx' \
+		 --gsc-excel-input 'https://github.com/GenomicsStandardsConsortium/mixs/raw/issue-610-temp-mixs-xlsx-home/mixs/excel/mixs_v6.xlsx' \
 		 --gsc-excel-output-dir downloads \
 		 --combo-checklists MigsEu \
 	 	 --combo-checklists Mims \
