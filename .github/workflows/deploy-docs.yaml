@@ -59,8 +59,9 @@ jobs:
           mkdir -p dist
           touch dist/.gitkeep
           # poetry run gen-doc -d mixs-docs-md generated-schema/mixs_6_2_rc.yaml
-          poetry run gen-doc -d mixs-docs-md --template-directory mixs-docs-templates  --use-slot-uris generated-schema/mixs_6_2_rc.yaml
-          poetry run mkdocs build -d dist
+#          poetry run gen-doc -d mixs-docs-md --template-directory mixs-docs-templates  --use-slot-uris generated-schema/mixs_6_2_rc.yaml
+#          poetry run mkdocs build -d dist
+          make gendoc
 
 #      - name: Build DataHarmonizer interface.
 #        working-directory: data_harmonizer
