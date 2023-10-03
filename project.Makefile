@@ -13,6 +13,7 @@ SOURCE_SCHEMA_PATH = generated-schema/$(RC_PREFIX).yaml
 
 DOCDIR = mixs-docs-md
 TEMPLATEDIR = mixs-docs-templates
+TERM_LIST_FILE = $(DOCDIR)/term_list.md
 
 # converted-data/data-conversion-report.md validate-linkml-rdf-data-pure-python
 
@@ -70,7 +71,7 @@ squeaky-clean: pre-clean
 
 generated-schema/mixs_6_2_rc.yaml:
 	$(RUN) write-mixs-linkml \
-		 --gsc-excel-input 'https://github.com/only1chunts/mixs-cih-fork/raw/main/mixs/excel/mixs_v6.xlsx' \
+		 --gsc-excel-input 'https://github.com/GenomicsStandardsConsortium/mixs/raw/issue-610-temp-mixs-xlsx-home/mixs/excel/mixs_v6.xlsx' \
 		 --gsc-excel-output-dir downloads \
 		 --combo-checklists MigsEu \
 	 	 --combo-checklists Mims \
@@ -462,7 +463,8 @@ gendoc: $(DOCDIR)
 #	# copying of images and static content
 #	cp $(SRC)/docs/*md $(DOCDIR) ; \
 #	cp -r $(SRC)/docs/images $(DOCDIR) ;
-	$(RUN) gen-doc -d $(DOCDIR) --template-directory $(TEMPLATEDIR)  --use-slot-uris $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-doc -d $(DOCDIR) --template-directory $(TEMPLATEDIR) --use-slot-uris $(SOURCE_SCHEMA_PATH)
+	$(RUN) python scripts/term_list_generator.py $(TERM_LIST_FILE)
 	#mv $(DOCDIR)/TEMP.md $(DOCDIR)/temp.md
 
 MKDOCS = $(RUN) mkdocs
