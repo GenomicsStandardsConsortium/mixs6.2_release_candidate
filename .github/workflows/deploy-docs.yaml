@@ -58,16 +58,13 @@ jobs:
           rm -rf dist
           mkdir -p dist
           touch dist/.gitkeep
-          # poetry run gen-doc -d mixs-docs-md generated-schema/mixs_6_2_rc.yaml
-#          poetry run gen-doc -d mixs-docs-md --template-directory mixs-docs-templates  --use-slot-uris generated-schema/mixs_6_2_rc.yaml
-#          poetry run mkdocs build -d dist
           make gendoc
 
-#      - name: Build DataHarmonizer interface.
-#        working-directory: data_harmonizer
-#        run: |
-#          poetry run regenerate-data-harmonizer-menu --schema-input-file ../generated-schema/mixs_6_2_rc.yaml --menu-json-out menu.json
-#          npm run build -- --outDir ../dist/__data_harmonizer --base /${{ github.event.repository.name }}/__data_harmonizer/
+      #      - name: Build DataHarmonizer interface.
+      #        working-directory: data_harmonizer
+      #        run: |
+      #          poetry run regenerate-data-harmonizer-menu --schema-input-file ../generated-schema/mixs_6_2_rc.yaml --menu-json-out menu.json
+      #          npm run build -- --outDir ../dist/__data_harmonizer --base /${{ github.event.repository.name }}/__data_harmonizer/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
