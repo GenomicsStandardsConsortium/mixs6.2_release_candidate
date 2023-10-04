@@ -380,9 +380,12 @@ def process_consensus_value(scn: str, attribute_name: str, value: str, global_ta
         global_target_schema.slots[tidied_slot_name].title = value
     elif tidied_attribute_name == "Definition":
         global_target_schema.slots[tidied_slot_name].description = value
-    elif tidied_attribute_name == "Example" and not math.isnan(value):
-        new_example = Example(value=value)
-        global_target_schema.slots[tidied_slot_name].examples = [new_example]
+    elif tidied_attribute_name == "Example":
+        if isinstance(value, float) and math.isnan(value):
+            pass
+        else:
+            new_example = Example(value=value)
+            global_target_schema.slots[tidied_slot_name].examples = [new_example]
     elif tidied_attribute_name == "Section":
         if value not in global_target_schema.subsets:
             global_target_schema.subsets[value] = SubsetDefinition(name=value)
@@ -472,9 +475,12 @@ def process_contested_value(attributes_by_class: pd.DataFrame, textual_key, glob
                 global_target_schema.classes[current_class].slot_usage[tidied_slot_name].title = value
             elif tidied_attribute_name == "Definition":
                 global_target_schema.classes[current_class].slot_usage[tidied_slot_name].description = value
-            elif tidied_attribute_name == "Example" and not math.isnan(value):
-                new_example = Example(value=value)
-                global_target_schema.classes[current_class].slot_usage[tidied_slot_name].examples = [new_example]
+            elif tidied_attribute_name == "Example":
+                if isinstance(value, float) and math.isnan(value):
+                    pass
+                else:
+                    new_example = Example(value=value)
+                    global_target_schema.classes[current_class].slot_usage[tidied_slot_name].examples = [new_example]
             elif tidied_attribute_name == "Section":
                 if value not in global_target_schema.subsets:
                     global_target_schema.subsets[value] = SubsetDefinition(name=value)
