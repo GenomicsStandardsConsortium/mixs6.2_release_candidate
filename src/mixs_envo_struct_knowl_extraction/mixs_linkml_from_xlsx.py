@@ -1,4 +1,5 @@
 import logging
+import math
 import os
 import pprint
 import re
@@ -379,7 +380,7 @@ def process_consensus_value(scn: str, attribute_name: str, value: str, global_ta
         global_target_schema.slots[tidied_slot_name].title = value
     elif tidied_attribute_name == "Definition":
         global_target_schema.slots[tidied_slot_name].description = value
-    elif tidied_attribute_name == "Example":
+    elif tidied_attribute_name == "Example" and not math.isnan(value):
         new_example = Example(value=value)
         global_target_schema.slots[tidied_slot_name].examples = [new_example]
     elif tidied_attribute_name == "Section":
@@ -398,6 +399,7 @@ def process_consensus_value(scn: str, attribute_name: str, value: str, global_ta
     elif tidied_attribute_name == "Value_syntax":
         global_target_schema.slots[tidied_slot_name].string_serialization = value
     elif tidied_attribute_name == "Requirement":
+        # print(yaml_dumper.dumps(new_annotation))
         if value == "-":
             global_target_schema.slots[tidied_slot_name].annotations[tidied_attribute_name] = new_annotation
         elif value == "C":
@@ -416,8 +418,15 @@ def process_consensus_value(scn: str, attribute_name: str, value: str, global_ta
     #     # and I doubt that UOMs will show up in linkml2sheets output
     #     new_uom = UnitOfMeasure(symbol=value)
     #     global_target_schema.slots[tidied_slot_name].unit = new_uom
+    # else:
+    #     # print(yaml_dumper.dumps(new_annotation))
+    #     global_target_schema.slots[tidied_slot_name].annotations[tidied_attribute_name] = new_annotation
     else:
-        global_target_schema.slots[tidied_slot_name].annotations[tidied_attribute_name] = new_annotation
+        if isinstance(value, float) and math.isnan(value):
+            # todo how would we get here?
+            logger.warning(f"{tidied_slot_name} {value} is NaN")
+        else:
+            global_target_schema.slots[tidied_slot_name].annotations[tidied_attribute_name] = new_annotation
 
 
 def process_contested_value(attributes_by_class: pd.DataFrame, textual_key, global_target_schema) -> None:
@@ -463,7 +472,7 @@ def process_contested_value(attributes_by_class: pd.DataFrame, textual_key, glob
                 global_target_schema.classes[current_class].slot_usage[tidied_slot_name].title = value
             elif tidied_attribute_name == "Definition":
                 global_target_schema.classes[current_class].slot_usage[tidied_slot_name].description = value
-            elif tidied_attribute_name == "Example":
+            elif tidied_attribute_name == "Example" and not math.isnan(value):
                 new_example = Example(value=value)
                 global_target_schema.classes[current_class].slot_usage[tidied_slot_name].examples = [new_example]
             elif tidied_attribute_name == "Section":
@@ -505,8 +514,12 @@ def process_contested_value(attributes_by_class: pd.DataFrame, textual_key, glob
                 #     new_uom = UnitOfMeasure(symbol=value)
                 #     global_target_schema.slots[tidied_slot_name].unit = new_uom
                 else:
-                    global_target_schema.classes[current_class].slot_usage[tidied_slot_name].annotations[
-                        tidied_attribute_name] = new_annotation
+                    if math.isnan(value):
+                        # todo how would we get here?
+                        logger.warning(f"{current_class} {tidied_slot_name} {value} is NaN")
+                    else:
+                        global_target_schema.classes[current_class].slot_usage[tidied_slot_name].annotations[
+                            tidied_attribute_name] = new_annotation
 
 
 def requirement_followup(sheet: pd.DataFrame, global_target_schema, debug_mode, textual_key):
