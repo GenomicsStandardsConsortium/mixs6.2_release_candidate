@@ -14,11 +14,11 @@ URI: <a href={{ schema.id }}>{{ schema.id }}</a>
 {%- endif -%}
 {% endfor %}
 
-## Packages
+## Extensions
 
-| Package | Description |
+| Extension | Description |
 {% for c in schemaview.all_classes().values() -%}
-{%- if c.is_a == "EnvironmentalPackage" -%}
+{%- if c.is_a == "Extension" -%}
 | --- | --- |
 | {{ gen.link(c) }} | {{ c.description }} |
 {%- endif -%}
