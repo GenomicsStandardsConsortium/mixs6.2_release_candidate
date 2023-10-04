@@ -465,6 +465,8 @@ gendoc: $(DOCDIR)
 #	cp -r $(SRC)/docs/images $(DOCDIR) ;
 	$(RUN) gen-doc -d $(DOCDIR) --template-directory $(TEMPLATEDIR) --use-slot-uris $(SOURCE_SCHEMA_PATH)
 	$(RUN) python scripts/term_list_generator.py $(TERM_LIST_FILE)
+	mkdir -p mixs-docs-md/javascripts
+	cp src/js-staging/tablesort.js mixs-docs-md/javascripts
 	#mv $(DOCDIR)/TEMP.md $(DOCDIR)/temp.md
 
 MKDOCS = $(RUN) mkdocs
