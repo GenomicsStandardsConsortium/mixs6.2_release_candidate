@@ -234,24 +234,24 @@ def harmonize_sheets(url: str, excel_file_path, textual_key, global_target_schem
 
     # # # # #
 
-    df_env_packages = pd.read_excel(excel_file_path, sheet_name='environmental_packages')
+    df_extensions = pd.read_excel(excel_file_path, sheet_name='environmental_packages')
 
     column_mapping = {
         'Environmental package': 'class',
         'Package item': 'Item',
     }
 
-    df_env_packages_renamed = del_and_rename_cols(df_env_packages, [], column_mapping)
+    df_extensions_renamed = del_and_rename_cols(df_extensions, [], column_mapping)
 
     # # # #
 
-    env_packages_renamed_col_list = df_env_packages_renamed.columns.tolist()
+    extensions_renamed_col_list = df_extensions_renamed.columns.tolist()
 
-    applicable_col_list = list(set(mixs_sheet_col_list).intersection(env_packages_renamed_col_list))
+    applicable_col_list = list(set(mixs_sheet_col_list).intersection(extensions_renamed_col_list))
 
-    env_pack_only = set(env_packages_renamed_col_list) - set(mixs_sheet_col_list)
+    env_pack_only = set(extensions_renamed_col_list) - set(mixs_sheet_col_list)
 
-    mixs_sheet_only = set(mixs_sheet_col_list) - set(env_packages_renamed_col_list)
+    mixs_sheet_only = set(mixs_sheet_col_list) - set(extensions_renamed_col_list)
 
     if len(mixs_sheet_only) > 0:
         logger.info(f"Columns only found in the MIxS sheet: {list(mixs_sheet_only)}")
@@ -259,12 +259,12 @@ def harmonize_sheets(url: str, excel_file_path, textual_key, global_target_schem
     if len(env_pack_only) > 0:
         logger.info(f"Columns only found in the environmental_packages sheet: {list(env_pack_only)}")
 
-    df_env_packages_renamed = df_env_packages_renamed[applicable_col_list]
+    df_extensions_renamed = df_extensions_renamed[applicable_col_list]
 
     # # # #
 
     # Stack DataFrames vertically
-    from_gsc = pd.concat([mixs_by_scn_and_class_renamed, df_env_packages_renamed])
+    from_gsc = pd.concat([mixs_by_scn_and_class_renamed, df_extensions_renamed])
 
     from_gsc = from_gsc.drop_duplicates()
 
