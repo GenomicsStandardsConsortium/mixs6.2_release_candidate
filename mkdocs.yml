@@ -7,10 +7,10 @@ plugins:
   - search
   - mermaid2
 nav:
+#  - "- Back to GitHub repository": https://github.com/microbiomedata/mixs-6-2-release-candidate
 #  - "- MIxS v6.2.rc Documentation Home": index.md
   - "Try the MIxS Validation Sandbox!": __data_harmonizer/
-#  - "- Back to GitHub repository": https://github.com/microbiomedata/mixs-6-2-release-candidate
-#  - "- Full term table": term_list.md
+  - "Full term table": term_list.md
 markdown_extensions:
   - tables
 extra_javascript:
