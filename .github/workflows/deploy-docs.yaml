@@ -54,6 +54,8 @@ jobs:
         run: |
           rm -rf mixs-docs-md
           mkdir -p mixs-docs-md
+          mkdir -p mixs-docs-md/javascripts
+          cp src/js-staging/tablesort.js mixs-docs-md/javascripts
           touch mixs-docs-md/.gitkeep          
           rm -rf dist
           mkdir -p dist
