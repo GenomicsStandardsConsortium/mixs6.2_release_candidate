@@ -61,6 +61,7 @@ jobs:
           mkdir -p dist
           touch dist/.gitkeep
           poetry run gen-doc -d mixs-docs-md --template-directory mixs-docs-templates  --use-slot-uris generated-schema/mixs_6_2_rc.yaml
+          poetry run python scripts/term_list_generator.py mixs-docs-md/term_list.md
           poetry run mkdocs build -d dist
 
       - name: Build DataHarmonizer interface.
