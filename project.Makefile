@@ -60,29 +60,21 @@ squeaky-clean: pre-clean
 	rm -rf curated-data/unwrapped-curated-data-for-slot-coverage-check.yaml
 	date > other-reports/make-all-started.txt
 
-# 	 	 --combo-checklists MigsEu \
-# 		 --combo-checklists MimarksS \
-#  		 --combo-environments HostAssociated \
-#  		 --combo-environments HumanGut \
-# 		 --combo-environments PlantAssociated \
-#  		 --combo-environments Water \
-#  		 --combo-environments HumanAssociated \
-#  		 --combo-environments HumanOral \
+#		 --combo-checklists MigsEu \
+ #	 	 --combo-checklists Mims \
+ # 		 --combo-checklists MimarksS \
+ # 		 --combo-environments PlantAssociated \
+ #  		 --combo-environments HostAssociated \
+ #  		 --combo-environments HumanAssociated \
+ #  		 --combo-environments HumanGut \
+ #  		 --combo-environments HumanOral \
+ #  		 --combo-environments Soil \
+ #  		 --combo-environments Water \
 
 generated-schema/mixs_6_2_rc.yaml:
 	$(RUN) write-mixs-linkml \
 		 --gsc-excel-input 'https://github.com/GenomicsStandardsConsortium/mixs/raw/issue-610-temp-mixs-xlsx-home/mixs/excel/mixs_v6.xlsx' \
 		 --gsc-excel-output-dir downloads \
-		 --combo-checklists MigsEu \
-	 	 --combo-checklists Mims \
- 		 --combo-checklists MimarksS \
- 		 --combo-environments PlantAssociated \
-  		 --combo-environments HostAssociated \
-  		 --combo-environments HumanAssociated \
-  		 --combo-environments HumanGut \
-  		 --combo-environments HumanOral \
-  		 --combo-environments Soil \
-  		 --combo-environments Water \
 		 --classes-ssheet config/build-test-only/schema-for-classes-schemasheet.tsv \
 		 --classes-ssheet config/build-test-only/prefixes-for-classes-schemasheet.tsv \
 		 --classes-ssheet config/classes-schemasheet.tsv \
