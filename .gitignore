@@ -1,6 +1,9 @@
 local
 .DS_Store
 
+schema-derivatives/mixs_6_2_rc.json
+data_harmonizer/schemas/mixs_6_2_rc.json
+
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode
 
