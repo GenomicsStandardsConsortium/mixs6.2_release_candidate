@@ -11,6 +11,7 @@ nav:
 #  - "- MIxS v6.2.rc Documentation Home": index.md
   - "Try the MIxS Validation Sandbox!": __data_harmonizer/
   - "Full term table": term_list.md
+  - "Combinations": combinations.md
 markdown_extensions:
   - tables
 extra_javascript:
